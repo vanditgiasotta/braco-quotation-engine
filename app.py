@@ -578,13 +578,16 @@ elif stage == "validated":
     status_map = {"APPROVED": "approved", "NEEDS_REVIEW": "review", "BLOCKED": "blocked"}
     report_by_line = {r.line_no: r for r in summary.reports}
 
-   for i in range(min(len(items), len(results))):
-    item = items[i]
-    result = results[i]
+   
+    safe_pairs = list(zip(items, results))
 
+for item, result in safe_pairs:
     report = report_by_line.get(item.line_no)
     if not report:
         continue
+    
+
+    
 
         css_cls = status_map.get(report.final_status, "review")
         conf = f"{report.confidence_score:.0%}"
