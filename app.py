@@ -33,14 +33,19 @@ if uploaded_file:
     st.success("File uploaded successfully")
 
     # ---------------- PARSE ---------------- #
-  import tempfile
+ # Convert uploaded file to temp path
+import tempfile
 
 with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp:
     tmp.write(uploaded_file.getvalue())
     temp_path = tmp.name
 
-parsed = parse_excel_file(temp_path, use_ai=use_ai, aggregate_sheets=aggregate)
-
+# Parse using file path
+parsed = parse_excel_file(
+    temp_path,
+    use_ai=use_ai,
+    aggregate_sheets=aggregate
+)
     items = []
     for p in parsed:
         try:
