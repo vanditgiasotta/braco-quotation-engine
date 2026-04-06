@@ -578,7 +578,9 @@ elif stage == "validated":
     status_map = {"APPROVED": "approved", "NEEDS_REVIEW": "review", "BLOCKED": "blocked"}
     report_by_line = {r.line_no: r for r in summary.reports}
 
-    for item, result in zip(items, results):
+    for i in range(min(len(items), len(results))):
+    item = items[i]
+    result = results[i]
         report = report_by_line.get(item.line_no)
         if not report:
             continue
